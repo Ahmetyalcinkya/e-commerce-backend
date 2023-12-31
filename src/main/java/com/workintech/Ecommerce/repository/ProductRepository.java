@@ -32,4 +32,17 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             " FROM ecommerce.products AS p WHERE p.name ILIKE %:name%", nativeQuery = true)
     List<Product> searchByName(String name);
 
+    @Query(value = "SELECT p.id, p.name, p.description, p.price, p.rating, p.sell_count, p.stock, p.images, p.category_id" +
+            " FROM ecommerce.products AS p WHERE p.name ILIKE %:name% ORDER BY p.price DESC", nativeQuery = true)
+    List<Product> searchAndSortHighest(String name);
+    @Query(value = "SELECT p.id, p.name, p.description, p.price, p.rating, p.sell_count, p.stock, p.images, p.category_id" +
+            " FROM ecommerce.products AS p WHERE p.name ILIKE %:name% ORDER BY p.price ASC", nativeQuery = true)
+    List<Product> searchAndSortLowest(String name);
+    @Query(value = "SELECT p.id, p.name, p.description, p.price, p.rating, p.sell_count, p.stock, p.images, p.category_id" +
+            " FROM ecommerce.products AS p WHERE p.name ILIKE %:name% ORDER BY p.rating DESC", nativeQuery = true)
+    List<Product> searchAndSortBest(String name);
+    @Query(value = "SELECT p.id, p.name, p.description, p.price, p.rating, p.sell_count, p.stock, p.images, p.category_id" +
+            " FROM ecommerce.products AS p WHERE p.name ILIKE %:name% ORDER BY p.rating ASC", nativeQuery = true)
+    List<Product> searchAndSortWorst(String name);
+
 }

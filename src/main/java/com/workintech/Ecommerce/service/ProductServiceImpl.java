@@ -37,15 +37,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponse saveProduct(ProductRequest product) {
-            if(product.name().trim().equalsIgnoreCase(productRepository.findByProductName(product.name().trim()))){
-                //TODO Throw exception -> Ürün zaten var
-                return null;
-            }
-            //TODO save doesn't work IMPORTANT!!!
-//            productRepository.save(product);
-//            return Converter.findProduct();
-            return null;
+    public ProductResponse saveProduct(Product product) {
+        return Converter.findProduct(productRepository.save(product)); // cateforyID must be set !!!!!
+    }
+
+
+    @Override
+    public ProductResponse updateProduct(long id, Product product) {
+        return null;
     }
 
     //TODO update method will be added if save works properly
@@ -84,5 +83,25 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductResponse> searchByName(String name) {
         return Converter.findProducts(productRepository.searchByName(name));
+    }
+
+    @Override
+    public List<ProductResponse> searchAndSortHighest(String name) {
+        return Converter.findProducts(productRepository.searchAndSortHighest(name));
+    }
+
+    @Override
+    public List<ProductResponse> searchAndSortLowest(String name) {
+        return Converter.findProducts(productRepository.searchAndSortLowest(name));
+    }
+
+    @Override
+    public List<ProductResponse> searchAndSortBest(String name) {
+        return Converter.findProducts(productRepository.searchAndSortBest(name));
+    }
+
+    @Override
+    public List<ProductResponse> searchAndSortWorst(String name) {
+        return Converter.findProducts(productRepository.searchAndSortWorst(name));
     }
 }

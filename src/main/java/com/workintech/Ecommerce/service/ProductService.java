@@ -10,14 +10,18 @@ public interface ProductService {
 
     List<ProductResponse> getAllProducts();
     ProductResponse getProductByID(long id);
-    ProductResponse saveProduct(ProductRequest product); // product response and product request
+    ProductResponse saveProduct(Product product); // Product request
+    ProductResponse updateProduct(long id, Product product);
     ProductResponse deleteProduct(long id);
     List<ProductResponse> sortHighestToLowest();
     List<ProductResponse> sortLowestToHighest();
     List<ProductResponse> sortBestToWorst();
     List<ProductResponse> sortWorstToBest();
     List<ProductResponse> searchByName(String name);
+    List<ProductResponse> searchAndSortHighest(String name);
+    List<ProductResponse> searchAndSortLowest(String name);
+    List<ProductResponse> searchAndSortBest(String name);
+    List<ProductResponse> searchAndSortWorst(String name);
 
-    // PRODUCT UPDATE
     // PRODUCT LIMIT
 }

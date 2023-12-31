@@ -20,6 +20,10 @@ public class Converter {
         }
         return categoryResponses;
     }
+    public static CategoryResponse findCategory(Category category){
+        return new CategoryResponse(category.getId(), category.getCode(), category.getGender(),category.getRating(),
+                category.getTitle(), category.getImage());
+    }
 
     // PRODUCTS
     public static List<ProductResponse> findProducts(List<Product> products){
