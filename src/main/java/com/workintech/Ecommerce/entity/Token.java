@@ -26,8 +26,4 @@ public class Token {
     @Column(name = "expiry_date")
     private Instant expiryDate;
 
-    public Token(String token, Instant expiryDate) {
-        this.token = token;
-        this.expiryDate = expiryDate;
-    }
 }

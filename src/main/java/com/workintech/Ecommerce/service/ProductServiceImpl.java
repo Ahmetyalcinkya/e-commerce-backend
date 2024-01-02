@@ -31,24 +31,24 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponse getProductByID(long id) {
+    public Product getProductByID(long id) {
         Optional<Product> productOptional = productRepository.findById(id);
         if(productOptional.isPresent()){
-            return Converter.findProduct(productOptional.get());
+            return productOptional.get();
         }
         //TODO Throw exception -> Ürün bulunamadı
         return null;
     }
 
     @Override
-    public ProductResponse saveProduct(Product product) {
+    public Product saveProduct(Product product) {
         productRepository.save(product);
-        return Converter.findProduct(product); // cateforyID must be set !!!!!
+        return product; // cateforyID must be set !!!!!
     }
     //TODO Update method will be added if save works properly
     @Override
-    public ProductResponse deleteProduct(long id) {
-        ProductResponse product = getProductByID(id);
+    public Product deleteProduct(long id) {
+        Product product = getProductByID(id);
         if(product != null){
         productRepository.deleteById(id);
         return product;

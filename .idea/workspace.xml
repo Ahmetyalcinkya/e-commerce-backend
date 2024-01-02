@@ -4,32 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8a7a8a8-70ca-4f56-8a5f-ad952074424b" name="Changes" comment="Filter methods added &amp;&amp; category saving but product not saving">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/AuthorizationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/RoleController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/dto/requestDto/LoginRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/dto/requestDto/UserRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/dto/responseDto/LoginResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/Token.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/repository/RoleRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/AuthenticationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/RoleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/RoleServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/TokenService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/util/KeyGeneratorUtility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/util/RsaKeyProperties.java" afterDir="false" />
+    <list default="true" id="e8a7a8a8-70ca-4f56-8a5f-ad952074424b" name="Changes" comment="Token added &amp;&amp; product not saving &amp; roles converted to class">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/dto/responseDto/UserResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/repository/TokenRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/TokenServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/UserServiceImpl.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/enums/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/Token.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/AuthenticationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/ProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/TokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/TokenService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/util/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/util/Converter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +34,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Record" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -141,7 +133,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704042292216</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Token added &amp;&amp; product not saving &amp; roles converted to class">
+      <option name="closed" value="true" />
+      <created>1704225700613</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1704225700613</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -149,7 +149,8 @@
     <MESSAGE value="Project initialized &amp; Category request added" />
     <MESSAGE value="Product requests added &amp; Product post and put mapping didn't work." />
     <MESSAGE value="Filter methods added &amp;&amp; category saving but product not saving" />
-    <option name="LAST_COMMIT_MESSAGE" value="Filter methods added &amp;&amp; category saving but product not saving" />
+    <MESSAGE value="Token added &amp;&amp; product not saving &amp; roles converted to class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Token added &amp;&amp; product not saving &amp; roles converted to class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -3,6 +3,7 @@ package com.workintech.Ecommerce.controller;
 import com.workintech.Ecommerce.dto.responseDto.ProductResponse;
 import com.workintech.Ecommerce.entity.Product;
 import com.workintech.Ecommerce.service.ProductService;
+import com.workintech.Ecommerce.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,19 +32,19 @@ public class ProductController {
 
     @GetMapping("/id/{id}")
     public ProductResponse getProductByID(@PathVariable long id){
-        return productService.getProductByID(id);
+        return Converter.findProduct(productService.getProductByID(id));
     }
 
     @PostMapping("/") //TODO Category choice should be fixed
     public ProductResponse saveProduct(Product product){
-        return productService.saveProduct(product);
+        return Converter.findProduct(productService.saveProduct(product));
     }
 
     //TODO Update will be added
 
     @DeleteMapping("/{id}")
     public ProductResponse deleteProduct(@PathVariable long id){
-        return productService.deleteProduct(id);
+        return Converter.findProduct(productService.deleteProduct(id));
     }
 
     @GetMapping("/filter")

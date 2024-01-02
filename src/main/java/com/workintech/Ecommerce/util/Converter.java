@@ -2,8 +2,10 @@ package com.workintech.Ecommerce.util;
 
 import com.workintech.Ecommerce.dto.responseDto.CategoryResponse;
 import com.workintech.Ecommerce.dto.responseDto.ProductResponse;
+import com.workintech.Ecommerce.dto.responseDto.UserResponse;
 import com.workintech.Ecommerce.entity.Category;
 import com.workintech.Ecommerce.entity.Product;
+import com.workintech.Ecommerce.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,5 +40,18 @@ public class Converter {
     public static ProductResponse findProduct(Product product){
         return new ProductResponse(product.getId(),product.getName(),product.getDescription(),product.getPrice(),
                 product.getRating(),product.getSellCount(),product.getStock(),product.getImages(),product.getCategory().getId());
+    }
+
+    //USERS
+    public static List<UserResponse> findUsers(List<User> users){
+        List<UserResponse> userResponses = new ArrayList<>();
+
+        for(User user: users){
+            userResponses.add(new UserResponse(user.getId(), user.getName(),user.getEmail()));
+        }
+        return userResponses;
+    }
+    public static UserResponse findUser(User user){
+        return new UserResponse(user.getId(), user.getName(),user.getEmail());
     }
 }

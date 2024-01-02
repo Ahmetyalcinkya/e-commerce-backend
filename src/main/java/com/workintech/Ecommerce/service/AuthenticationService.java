@@ -62,9 +62,12 @@ public class AuthenticationService {
             Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(email, password));
                     String token = tokenService.generateJwtToken(auth);
+
                     User foundUser = setUserToken(email);
                     Instant instant = Instant.now().plus(24, ChronoUnit.HOURS);
-                    foundUser.setToken(new Token(token, instant));  //todo constructor without id -- This may start an infinite loop!!!
+                    Token userToken = new Token(foundUser.getId(), token, instant);
+                    tokenService.saveToken(userToken);
+
                     return new LoginResponse(token);
         }catch (Exception ex){
             ex.printStackTrace();

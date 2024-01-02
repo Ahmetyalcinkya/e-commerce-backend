@@ -9,10 +9,10 @@ public interface ProductService {
 
     ProductResponse getProductByName(String name);
     List<ProductResponse> getAllProducts();
-    ProductResponse getProductByID(long id);
-    ProductResponse saveProduct(Product product); // Product request
+    Product getProductByID(long id);
+    Product saveProduct(Product product); // Product request
 //    ProductResponse updateProduct(long id, Product product);
-    ProductResponse deleteProduct(long id);
+    Product deleteProduct(long id);
     List<ProductResponse> sortHighestToLowest();
     List<ProductResponse> sortLowestToHighest();
     List<ProductResponse> sortBestToWorst();
