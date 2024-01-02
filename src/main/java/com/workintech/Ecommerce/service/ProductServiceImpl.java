@@ -1,6 +1,5 @@
 package com.workintech.Ecommerce.service;
 
-import com.workintech.Ecommerce.dto.requestDto.ProductRequest;
 import com.workintech.Ecommerce.dto.responseDto.ProductResponse;
 import com.workintech.Ecommerce.entity.Product;
 import com.workintech.Ecommerce.repository.ProductRepository;
@@ -22,6 +21,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public ProductResponse getProductByName(String name) {
+        return Converter.findProduct(productRepository.findByProductName(name));
+    }
+
+    @Override
     public List<ProductResponse> getAllProducts() {
         return Converter.findProducts(productRepository.findAll());
     }
@@ -38,17 +42,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponse saveProduct(Product product) {
-        return Converter.findProduct(productRepository.save(product)); // cateforyID must be set !!!!!
+        productRepository.save(product);
+        return Converter.findProduct(product); // cateforyID must be set !!!!!
     }
-
-
-    @Override
-    public ProductResponse updateProduct(long id, Product product) {
-        return null;
-    }
-
-    //TODO update method will be added if save works properly
-
+    //TODO Update method will be added if save works properly
     @Override
     public ProductResponse deleteProduct(long id) {
         ProductResponse product = getProductByID(id);
@@ -61,22 +58,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductResponse> sortHighestToLowest(/*String name*/) {
+    public List<ProductResponse> sortHighestToLowest() {
         return Converter.findProducts(productRepository.sortHighestToLowest());
     }
 
     @Override
-    public List<ProductResponse> sortLowestToHighest(/*String name*/) {
+    public List<ProductResponse> sortLowestToHighest() {
         return Converter.findProducts(productRepository.sortLowestToHighest());
     }
 
     @Override
-    public List<ProductResponse> sortBestToWorst(/*String name*/) {
+    public List<ProductResponse> sortBestToWorst() {
         return Converter.findProducts(productRepository.sortBestToWorst());
     }
 
     @Override
-    public List<ProductResponse> sortWorstToBest(/*String name*/) {
+    public List<ProductResponse> sortWorstToBest() {
         return Converter.findProducts(productRepository.sortWorstToBest());
     }
 

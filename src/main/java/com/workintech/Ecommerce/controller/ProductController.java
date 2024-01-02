@@ -23,28 +23,34 @@ public class ProductController {
     public List<ProductResponse> getAllProducts(){
         return productService.getAllProducts();
     }
-    @GetMapping("/{id}")
+
+    @GetMapping("/name/{name}") //TODO nullpointer must be fixed
+    public ProductResponse getProductByName(@PathVariable String name){
+        return productService.getProductByName(name);
+    }
+
+    @GetMapping("/id/{id}")
     public ProductResponse getProductByID(@PathVariable long id){
         return productService.getProductByID(id);
     }
-    @PostMapping("/")
+
+    @PostMapping("/") //TODO Category choice should be fixed
     public ProductResponse saveProduct(Product product){
         return productService.saveProduct(product);
     }
-    @PutMapping("/{id}")
-    public ProductResponse updateProduct(@PathVariable long id, Product product){
-        return productService.updateProduct(id, product);
-    }
+
+    //TODO Update will be added
+
     @DeleteMapping("/{id}")
     public ProductResponse deleteProduct(@PathVariable long id){
         return productService.deleteProduct(id);
     }
 
-    @GetMapping("/")
-    @ResponseBody
+    @GetMapping("/filter")
+    @ResponseBody                   //TODO Category will be added in request param !!
     public List<ProductResponse> filterProducts(@RequestParam(name = "filter", required = false) String name,
                                                 @RequestParam(name = "sort", required = false, defaultValue = "default") String sort){
-        if(name == null && name.isEmpty()){
+        if(name == null){
             switch (sort){
                 case "rating:desc":
                     return productService.sortBestToWorst();

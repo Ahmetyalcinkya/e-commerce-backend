@@ -4,24 +4,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8a7a8a8-70ca-4f56-8a5f-ad952074424b" name="Changes" comment="Product requests added &amp; Product post and put mapping didn't work.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/dto/requestDto/ProductRequest.java" afterDir="false" />
+    <list default="true" id="e8a7a8a8-70ca-4f56-8a5f-ad952074424b" name="Changes" comment="Filter methods added &amp;&amp; category saving but product not saving">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/AuthorizationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/RoleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/dto/requestDto/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/dto/requestDto/UserRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/dto/responseDto/LoginResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/Token.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/repository/RoleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/AuthenticationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/RoleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/RoleServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/TokenService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/util/KeyGeneratorUtility.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/util/RsaKeyProperties.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/enums/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/Role.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/repository/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/CategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/CategoryServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/ProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/ProductServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/util/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/util/Converter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -63,7 +79,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Ahmet Yalçınkaya (Kişisel Dosyalar)/Java/e-commerce-backend/src/Main.java&quot;
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Ahmet Yalçınkaya (Kişisel Dosyalar)/Java/e-commerce-backend/src/Main.java&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -116,14 +133,23 @@
       <option name="project" value="LOCAL" />
       <updated>1703984520764</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Filter methods added &amp;&amp; category saving but product not saving">
+      <option name="closed" value="true" />
+      <created>1704042292216</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1704042292216</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Project initialized &amp; Category request added" />
     <MESSAGE value="Product requests added &amp; Product post and put mapping didn't work." />
-    <option name="LAST_COMMIT_MESSAGE" value="Product requests added &amp; Product post and put mapping didn't work." />
+    <MESSAGE value="Filter methods added &amp;&amp; category saving but product not saving" />
+    <option name="LAST_COMMIT_MESSAGE" value="Filter methods added &amp;&amp; category saving but product not saving" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
