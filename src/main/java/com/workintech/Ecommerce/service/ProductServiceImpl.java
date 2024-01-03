@@ -1,6 +1,8 @@
 package com.workintech.Ecommerce.service;
 
+import com.workintech.Ecommerce.dto.requestDto.ProductRequest;
 import com.workintech.Ecommerce.dto.responseDto.ProductResponse;
+import com.workintech.Ecommerce.entity.Category;
 import com.workintech.Ecommerce.entity.Product;
 import com.workintech.Ecommerce.repository.ProductRepository;
 import com.workintech.Ecommerce.util.Converter;
@@ -39,13 +41,15 @@ public class ProductServiceImpl implements ProductService {
         //TODO Throw exception -> Ürün bulunamadı
         return null;
     }
-
     @Override
     public Product saveProduct(Product product) {
-        productRepository.save(product);
-        return product; // cateforyID must be set !!!!!
+        Product foundProduct = productRepository.findByProductName(product.getName());
+        if(product.getName().equalsIgnoreCase(foundProduct.getName())){
+            return null;
+            //TODO Throw exception -> Bu isimde ürün var
+        }
+        return productRepository.save(product);
     }
-    //TODO Update method will be added if save works properly
     @Override
     public Product deleteProduct(long id) {
         Product product = getProductByID(id);

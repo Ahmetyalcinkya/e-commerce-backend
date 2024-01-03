@@ -1,6 +1,7 @@
 package com.workintech.Ecommerce.service;
 
 import com.workintech.Ecommerce.dto.responseDto.UserResponse;
+import com.workintech.Ecommerce.entity.Token;
 import com.workintech.Ecommerce.entity.User;
 import com.workintech.Ecommerce.repository.UserRepository;
 import com.workintech.Ecommerce.util.Converter;
@@ -46,6 +47,11 @@ public class UserServiceImpl implements UserDetailsService,UserService {
     @Override
     public UserResponse saveUser(User user) {
         return Converter.findUser(userRepository.save(user));
+    }
+
+    @Override
+    public void updateUser(Token token, User user) {
+        user.setToken(token);
     }
 
     @Override

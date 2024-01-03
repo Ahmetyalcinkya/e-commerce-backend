@@ -1,7 +1,10 @@
 package com.workintech.Ecommerce.controller;
 
+import com.workintech.Ecommerce.dto.requestDto.ProductRequest;
 import com.workintech.Ecommerce.dto.responseDto.ProductResponse;
+import com.workintech.Ecommerce.entity.Category;
 import com.workintech.Ecommerce.entity.Product;
+import com.workintech.Ecommerce.service.CategoryService;
 import com.workintech.Ecommerce.service.ProductService;
 import com.workintech.Ecommerce.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +17,12 @@ import java.util.List;
 public class ProductController {
 
     private ProductService productService;
+    private CategoryService categoryService;
 
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, CategoryService categoryService) {
         this.productService = productService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping
@@ -35,12 +40,21 @@ public class ProductController {
         return Converter.findProduct(productService.getProductByID(id));
     }
 
-    @PostMapping("/") //TODO Category choice should be fixed
-    public ProductResponse saveProduct(Product product){
+    @PostMapping("/")
+    public ProductResponse saveProduct(@RequestBody ProductRequest productRequest){
+        Product product = new Product();
+        product.setName(productRequest.name());
+        product.setDescription(productRequest.desc());
+        product.setPrice(productRequest.price());
+        product.setRating(productRequest.rating());
+        product.setSellCount(productRequest.sellCount());
+        product.setStock(productRequest.stock());
+        product.setImages(productRequest.images());
+        Category category = categoryService.getCategoryByID(productRequest.categoryID());
+        product.setCategory(category);
+        category.addProduct(product);
         return Converter.findProduct(productService.saveProduct(product));
     }
-
-    //TODO Update will be added
 
     @DeleteMapping("/{id}")
     public ProductResponse deleteProduct(@PathVariable long id){

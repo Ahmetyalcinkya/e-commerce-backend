@@ -25,16 +25,18 @@ public class AuthenticationService {
     private PasswordEncoder passwordEncoder;
     private AuthenticationManager authenticationManager;
     private TokenService tokenService;
+    private UserService userService;
 
     @Autowired
-
     public AuthenticationService(UserRepository userRepository, RoleRepository roleRepository,
-                                 PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, TokenService tokenService) {
+                                 PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager,
+                                 TokenService tokenService, UserService userService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.tokenService = tokenService;
+        this.userService = userService;
     }
 
     //TODO change the return value
@@ -65,7 +67,10 @@ public class AuthenticationService {
 
                     User foundUser = setUserToken(email);
                     Instant instant = Instant.now().plus(24, ChronoUnit.HOURS);
-                    Token userToken = new Token(foundUser.getId(), token, instant);
+                    Token userToken = new Token();
+                    userToken.setToken(token);
+                    userToken.setExpiryDate(instant);
+                    userService.updateUser(userToken, foundUser);
                     tokenService.saveToken(userToken);
 
                     return new LoginResponse(token);

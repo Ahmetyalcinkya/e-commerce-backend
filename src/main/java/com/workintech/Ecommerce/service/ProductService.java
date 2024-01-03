@@ -11,7 +11,6 @@ public interface ProductService {
     List<ProductResponse> getAllProducts();
     Product getProductByID(long id);
     Product saveProduct(Product product); // Product request
-//    ProductResponse updateProduct(long id, Product product);
     Product deleteProduct(long id);
     List<ProductResponse> sortHighestToLowest();
     List<ProductResponse> sortLowestToHighest();

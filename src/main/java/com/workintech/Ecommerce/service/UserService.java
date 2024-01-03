@@ -2,6 +2,7 @@ package com.workintech.Ecommerce.service;
 
 import com.workintech.Ecommerce.dto.requestDto.UserRequest;
 import com.workintech.Ecommerce.dto.responseDto.UserResponse;
+import com.workintech.Ecommerce.entity.Token;
 import com.workintech.Ecommerce.entity.User;
 import com.workintech.Ecommerce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,6 @@ public interface UserService {
     List<UserResponse> getAllUsers();
     User findUserByID(long id);
     UserResponse saveUser(User user);
+    void updateUser(Token token, User user);
     User deleteUser(long id);
 }
