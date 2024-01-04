@@ -1,6 +1,7 @@
 package com.workintech.Ecommerce.service;
 
 import com.workintech.Ecommerce.dto.responseDto.LoginResponse;
+import com.workintech.Ecommerce.dto.responseDto.UserResponse;
 import com.workintech.Ecommerce.entity.ConfirmationToken;
 import com.workintech.Ecommerce.entity.Role;
 import com.workintech.Ecommerce.entity.Token;
@@ -32,11 +33,12 @@ public class AuthenticationService {
     private TokenService tokenService;
     private UserService userService;
     private ConfirmationTokenService confirmationTokenService;
+    private EmailService emailService;
 
     @Autowired
     public AuthenticationService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder,
                                  AuthenticationManager authenticationManager, TokenService tokenService, UserService userService,
-                                 ConfirmationTokenService confirmationTokenService) {
+                                 ConfirmationTokenService confirmationTokenService, EmailService emailService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
@@ -44,16 +46,17 @@ public class AuthenticationService {
         this.tokenService = tokenService;
         this.userService = userService;
         this.confirmationTokenService = confirmationTokenService;
+        this.emailService = emailService;
     }
 
     //TODO change the return value
     @Transactional
     public User register(String name, String email, String password, String role){
 
-        userService.findUserByEmail(email); //user varsa hata fırlatır
+        userService.findUserByEmail(email);
 
-        String encodedPassword = passwordEncoder.encode(password); // şifreyi encode eder
-        Role userRole = roleRepository.findByAuthority(role).get(); // role bulunur
+        String encodedPassword = passwordEncoder.encode(password);
+        Role userRole = roleRepository.findByAuthority(role).get();
 
         User user = new User(); //kullanıcı setlenir
         user.setName(name);
@@ -61,10 +64,16 @@ public class AuthenticationService {
         user.setPassword(encodedPassword);
         user.setRole(userRole);
         userRepository.save(user);
-        String emailToken = UUID.randomUUID().toString(); // email token için rastgele path oluşturur
+        String emailToken = UUID.randomUUID().toString();
         ConfirmationToken confirmationToken = new ConfirmationToken(emailToken, LocalDateTime.now(), LocalDateTime.now().plusMinutes(15), user);
-        confirmationTokenService.saveConfirmationToken(confirmationToken); // email token kısmını database içerisine setler
-        //TODO Send confirmation email
+        confirmationTokenService.saveConfirmationToken(confirmationToken);
+
+        String text = "Congrats!\n"+
+                "Your registration to E-Commerce is successful. The only thing you need to" +
+                " do is to click the link below to activate your account and start shopping!\n"+
+                "Activate your account: " + "http://localhost:9000/auth/confirm?emailToken="+emailToken;
+
+        emailService.sendEmail(email, "E-Commerce Activation", text);
 
         return user;
     }
