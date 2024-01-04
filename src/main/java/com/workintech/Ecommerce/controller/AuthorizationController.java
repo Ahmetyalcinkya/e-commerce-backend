@@ -6,10 +6,7 @@ import com.workintech.Ecommerce.dto.responseDto.LoginResponse;
 import com.workintech.Ecommerce.entity.User;
 import com.workintech.Ecommerce.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -26,9 +23,15 @@ public class AuthorizationController {
     public User register(@RequestBody UserRequest userRequest){
         return authenticationService.register(userRequest.name(), userRequest.email(), userRequest.password(), userRequest.role());
     }
+
+    @GetMapping("/confirm")
+    @ResponseBody
+    public String confirm(@RequestParam(name = "emailToken") String emailToken){
+        return authenticationService.confirmEmailToken(emailToken);
+    }
+
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest){
-//TODO Set token to database
         return authenticationService.login(loginRequest.email(), loginRequest.password());
     }
 }

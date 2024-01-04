@@ -38,6 +38,13 @@ public class User implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "token_id")
     private Token token;
+
+    @Column(name = "locked")
+    private Boolean locked = false;
+
+    @Column(name = "enabled")
+    private Boolean enabled = false;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.toString());
@@ -61,7 +68,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !locked;
     }
 
     @Override
@@ -71,6 +78,6 @@ public class User implements UserDetails {
 
     @Override // email verification
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }

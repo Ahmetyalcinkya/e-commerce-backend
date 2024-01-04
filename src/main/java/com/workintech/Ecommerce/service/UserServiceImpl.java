@@ -40,8 +40,17 @@ public class UserServiceImpl implements UserDetailsService,UserService {
         if(optionalUser.isPresent()){
             return optionalUser.get();
         }
-        //TODO Throw exception
+        //TODO Throw exception -> Kullanıcı yok
         return null;
+    }
+
+    @Override
+    public void findUserByEmail(String email){
+       boolean userExist = userRepository.findUserByEmail(email).isPresent();
+       if(userExist){
+           //TODO Throw exception
+           throw new IllegalStateException("Email already taken.");
+       }
     }
 
     @Override
@@ -63,5 +72,9 @@ public class UserServiceImpl implements UserDetailsService,UserService {
         }
         userRepository.delete(user);
         return user;
+    }
+    @Override
+    public int enableUser(String email) {
+       return userRepository.enableUser(email);
     }
 }
