@@ -7,8 +7,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -44,6 +46,28 @@ public class User implements UserDetails {
 
     @Column(name = "enabled")
     private Boolean enabled = false;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Address> addresses;
+
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,
+            CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinTable(name = "user_billing_address", schema = "ecommerce",
+            joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name = "billing_address_id"))
+    private List<BillingAddress> billingAddresses;
+
+    public void addAddress(Address address){
+        if(addresses == null){
+            addresses = new ArrayList<>();
+        }
+        addresses.add(address);
+    }
+    public void addBillingAddress(BillingAddress address){
+        if(billingAddresses == null){
+            billingAddresses = new ArrayList<>();
+        }
+        billingAddresses.add(address);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,15 +1,20 @@
 package com.workintech.Ecommerce.service;
 
+import com.workintech.Ecommerce.dto.responseDto.ProductResponse;
 import com.workintech.Ecommerce.dto.responseDto.UserResponse;
-import com.workintech.Ecommerce.entity.Token;
-import com.workintech.Ecommerce.entity.User;
+import com.workintech.Ecommerce.entity.*;
 import com.workintech.Ecommerce.repository.UserRepository;
 import com.workintech.Ecommerce.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,10 +23,12 @@ import java.util.Optional;
 public class UserServiceImpl implements UserDetailsService,UserService {
 
     private UserRepository userRepository;
+    private AddressService addressService;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, AddressService addressService) {
         this.userRepository = userRepository;
+        this.addressService = addressService;
     }
 
     @Override
@@ -76,5 +83,33 @@ public class UserServiceImpl implements UserDetailsService,UserService {
     @Override
     public int enableUser(String email) {
        return userRepository.enableUser(email);
+    }
+
+    @Override
+    public String getAuthenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+         return authentication.getName();
+    }
+
+    @Override
+    public BillingAddress addBillingAddress(BillingAddress billingAddress) {
+        String userEmail = getAuthenticatedUser();
+        //TODO Throw exception
+        User user = userRepository.findUserByEmail(userEmail).orElseThrow(() -> new RuntimeException("User not found with email: " + userEmail));
+
+        user.addBillingAddress(billingAddress);
+        userRepository.save(user);
+        return billingAddress;
+    }
+    @Override
+    public Address addAddress(Address address) {
+        String userEmail = getAuthenticatedUser();
+        //TODO Throw exception
+        User user = userRepository.findUserByEmail(userEmail).orElseThrow(() -> new RuntimeException("User not found with email: " + userEmail));
+
+        address.setUser(user);
+        user.addAddress(address);
+        addressService.saveAddress(address);
+        return address;
     }
 }
