@@ -1,15 +1,22 @@
 package com.workintech.Ecommerce.util;
 
-import com.workintech.Ecommerce.dto.responseDto.AddressResponse;
-import com.workintech.Ecommerce.dto.responseDto.CategoryResponse;
-import com.workintech.Ecommerce.dto.responseDto.ProductResponse;
-import com.workintech.Ecommerce.dto.responseDto.UserResponse;
+import com.workintech.Ecommerce.dto.responseDto.*;
 import com.workintech.Ecommerce.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Converter {
+
+    //ROLES
+    public static List<RoleResponse> findRoles(List<Role> roles){
+        List<RoleResponse> responses = new ArrayList<>();
+
+        for(Role role: roles){
+            responses.add(new RoleResponse(role.getId(),role.getAuthority()));
+        }
+        return responses;
+    }
 
     // CATEGORY
     public static List<CategoryResponse> findCategories(List<Category> categories){
