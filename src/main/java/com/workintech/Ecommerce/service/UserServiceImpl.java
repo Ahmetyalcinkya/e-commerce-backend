@@ -7,6 +7,7 @@ import com.workintech.Ecommerce.exceptions.ECommerceException;
 import com.workintech.Ecommerce.repository.UserRepository;
 import com.workintech.Ecommerce.util.Constants;
 import com.workintech.Ecommerce.util.Converter;
+import com.workintech.Ecommerce.util.validation.ECommerceValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -63,6 +64,9 @@ public class UserServiceImpl implements UserDetailsService,UserService {
 
     @Override
     public UserResponse saveUser(User user) {
+        ECommerceValidation.checkString(user.getName(),"Name", 50);
+        ECommerceValidation.checkString(user.getEmail(),"Email", 100);
+//        ECommerceValidation.checkPassword(user.getPassword());
         return Converter.findUser(userRepository.save(user));
     }
 
@@ -96,7 +100,14 @@ public class UserServiceImpl implements UserDetailsService,UserService {
         String userEmail = getAuthenticatedUser();
         User user = userRepository.findUserByEmail(userEmail).orElseThrow(() ->
                 new ECommerceException(Constants.USER_NOT_FOUND + userEmail,HttpStatus.NOT_FOUND));
-
+        ECommerceValidation.checkString(billingAddress.getName(), "Name",20);
+        ECommerceValidation.checkString(billingAddress.getSurname(), "Surname",30);
+        ECommerceValidation.checkString(billingAddress.getTitle(), "Title",20);
+        ECommerceValidation.checkString(billingAddress.getTitle(), "City",20);
+        ECommerceValidation.checkString(billingAddress.getTitle(), "District",30);
+        ECommerceValidation.checkString(billingAddress.getTitle(), "Neighborhood",30);
+        ECommerceValidation.checkString(billingAddress.getTitle(), "Address",150);
+        ECommerceValidation.checkPhone(billingAddress.getPhone());
         user.addBillingAddress(billingAddress);
         userRepository.save(user);
         return billingAddress;
@@ -106,7 +117,14 @@ public class UserServiceImpl implements UserDetailsService,UserService {
         String userEmail = getAuthenticatedUser();
         User user = userRepository.findUserByEmail(userEmail).orElseThrow(() ->
                 new ECommerceException(Constants.USER_NOT_FOUND + userEmail,HttpStatus.NOT_FOUND));
-
+        ECommerceValidation.checkString(address.getName(), "Name",20);
+        ECommerceValidation.checkString(address.getSurname(), "Surname",30);
+        ECommerceValidation.checkString(address.getTitle(), "Title",20);
+        ECommerceValidation.checkString(address.getTitle(), "City",20);
+        ECommerceValidation.checkString(address.getTitle(), "District",30);
+        ECommerceValidation.checkString(address.getTitle(), "Neighborhood",30);
+        ECommerceValidation.checkString(address.getTitle(), "Address",150);
+        ECommerceValidation.checkPhone(address.getPhone());
         address.setUser(user);
         user.addAddress(address);
         addressService.saveAddress(address);

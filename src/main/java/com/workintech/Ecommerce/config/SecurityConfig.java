@@ -106,11 +106,11 @@ public class SecurityConfig {
                     auth.requestMatchers(HttpMethod.GET,"/categories").permitAll();
                     auth.requestMatchers("/categories/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_STORE");// will be added to frontend
 
-                    auth.requestMatchers(HttpMethod.GET,"/products").permitAll(); // +
+                    auth.requestMatchers(HttpMethod.GET,"/products/").permitAll();
                     auth.requestMatchers(HttpMethod.POST,"/products/").hasAnyAuthority("ROLE_ADMIN", "ROLE_STORE");
                     auth.requestMatchers(HttpMethod.GET,"/products/name/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
                     auth.requestMatchers(HttpMethod.GET,"/products/id/**").permitAll();
-                    auth.requestMatchers(HttpMethod.GET,"/products/filter/**").permitAll();
+                    auth.requestMatchers(HttpMethod.GET,"/products/**").permitAll();
                     auth.requestMatchers(HttpMethod.DELETE,"/products/id/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_STORE");
 
                     auth.requestMatchers(HttpMethod.GET,"/user/address").hasAuthority("ROLE_USER");

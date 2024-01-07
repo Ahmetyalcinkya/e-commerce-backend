@@ -12,7 +12,6 @@ import java.util.List;
 @RequestMapping("/admin/user")
 public class UserController {
 
-//TODO Convert return types of all classes
     private UserService userService;
 
     public UserController(UserService userService) {

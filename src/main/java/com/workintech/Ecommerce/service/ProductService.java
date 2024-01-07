@@ -21,6 +21,7 @@ public interface ProductService {
     List<ProductResponse> searchAndSortLowest(String name);
     List<ProductResponse> searchAndSortBest(String name);
     List<ProductResponse> searchAndSortWorst(String name);
+    List<ProductResponse> getCategoryProducts(int categoryID);
 
     // PRODUCT LIMIT
 }

@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/products")
@@ -28,7 +29,7 @@ public class ProductController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public List<ProductResponse> getAllProducts(){
         return productService.getAllProducts();
     }
@@ -64,30 +65,34 @@ public class ProductController {
         return Converter.findProduct(productService.deleteProduct(id));
     }
 
-    @GetMapping("/filter")
-    @ResponseBody                   //TODO Category will be added in request param !!
+    @GetMapping
+    @ResponseBody           //TODO Category must be added.
     public List<ProductResponse> filterProducts(@RequestParam(name = "filter", required = false) String name,
-                                                @RequestParam(name = "sort", required = false, defaultValue = "default") String sort){
-        if(name == null){
-            switch (sort){
-                case "rating:desc":
-                    return productService.sortBestToWorst();
-                case "rating:asc":
-                    return productService.sortWorstToBest();
-                case "price:desc":
-                    return productService.sortHighestToLowest();
-                case "price:asc":
-                    return productService.sortLowestToHighest();
-            }
-        }else {
-            return switch (sort) {
-                case "rating:desc" -> productService.searchAndSortBest(name);
-                case "rating:asc" -> productService.searchAndSortWorst(name);
-                case "price:desc" -> productService.searchAndSortHighest(name);
-                case "price:asc" -> productService.searchAndSortLowest(name);
-                default -> productService.searchByName(name);
-            };
-        }
-        throw new ECommerceException(Constants.FILTER_NOT_EXIST, HttpStatus.NOT_FOUND);
+                                                @RequestParam(name = "sort", required = false, defaultValue = "default") String sort /*,
+                                                @RequestParam(name = "category", required = false) int id*/){
+//        if (id > 0){
+//           return productService.getCategoryProducts(id);
+//        }
+          if(name == null){
+              switch (sort){
+                  case "rating:desc":
+                      return productService.sortBestToWorst();
+                  case "rating:asc":
+                      return productService.sortWorstToBest();
+                  case "price:desc":
+                      return productService.sortHighestToLowest();
+                  case "price:asc":
+                      return productService.sortLowestToHighest();
+              }
+          }else {
+              return switch (sort) {
+                  case "rating:desc" -> productService.searchAndSortBest(name);
+                  case "rating:asc" -> productService.searchAndSortWorst(name);
+                  case "price:desc" -> productService.searchAndSortHighest(name);
+                  case "price:asc" -> productService.searchAndSortLowest(name);
+                  default -> productService.searchByName(name);
+              };
+          }
+        return getAllProducts();
     }
 }

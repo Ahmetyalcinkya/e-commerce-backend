@@ -4,6 +4,7 @@ import com.workintech.Ecommerce.entity.BillingAddress;
 import com.workintech.Ecommerce.exceptions.ECommerceException;
 import com.workintech.Ecommerce.repository.BillingAddressRepository;
 import com.workintech.Ecommerce.util.Constants;
+import com.workintech.Ecommerce.util.validation.ECommerceValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,14 @@ public class BillingAddressServiceImpl implements BillingAddressService {
 
     @Override
     public BillingAddress saveBillingAddress(BillingAddress address) {
+        ECommerceValidation.checkString(address.getName(), "Name",20);
+        ECommerceValidation.checkString(address.getSurname(), "Surname",30);
+        ECommerceValidation.checkString(address.getTitle(), "Title",20);
+        ECommerceValidation.checkString(address.getTitle(), "City",20);
+        ECommerceValidation.checkString(address.getTitle(), "District",30);
+        ECommerceValidation.checkString(address.getTitle(), "Neighborhood",30);
+        ECommerceValidation.checkString(address.getTitle(), "Address",150);
+        ECommerceValidation.checkPhone(address.getPhone());
         return billingAddressRepository.save(address);
     }
 

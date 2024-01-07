@@ -1,17 +1,19 @@
 package com.workintech.Ecommerce.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
+@Validated
 @Data
 @NoArgsConstructor
 @Entity
@@ -26,6 +28,7 @@ public class User implements UserDetails {
     @Column(name = "name")
     private String name;
 
+    @Email
     @Column(name = "email")
     private String email;
 

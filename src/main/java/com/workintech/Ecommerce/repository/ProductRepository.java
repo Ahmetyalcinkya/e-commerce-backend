@@ -1,6 +1,5 @@
 package com.workintech.Ecommerce.repository;
 
-import com.workintech.Ecommerce.dto.responseDto.ProductResponse;
 import com.workintech.Ecommerce.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -46,5 +45,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "SELECT p.id, p.name, p.description, p.price, p.rating, p.sell_count, p.stock, p.images, p.category_id" +
             " FROM ecommerce.products AS p WHERE p.name ILIKE %:name% ORDER BY p.rating ASC", nativeQuery = true)
     List<Product> searchAndSortWorst(String name);
+    @Query(value = "SELECT * FROM ecommerce.products AS p WHERE p.category_id = :categoryID",nativeQuery = true)
+    List<Product> getCategoryProducts(int categoryID);
 
 }

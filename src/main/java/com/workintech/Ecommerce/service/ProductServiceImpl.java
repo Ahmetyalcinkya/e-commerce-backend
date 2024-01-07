@@ -8,6 +8,7 @@ import com.workintech.Ecommerce.exceptions.ECommerceException;
 import com.workintech.Ecommerce.repository.ProductRepository;
 import com.workintech.Ecommerce.util.Constants;
 import com.workintech.Ecommerce.util.Converter;
+import com.workintech.Ecommerce.util.validation.ECommerceValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -53,6 +54,14 @@ public class ProductServiceImpl implements ProductService {
         if(foundProduct.isPresent()){
            throw new ECommerceException(Constants.PRODUCT_IS_EXIST, HttpStatus.BAD_REQUEST);
         }
+        ECommerceValidation.checkString(product.getName(),"Name",100);
+        ECommerceValidation.checkString(product.getDescription(),"Description",250);
+        ECommerceValidation.checkPrice(product.getPrice());
+        ECommerceValidation.checkRating(product.getRating());
+        ECommerceValidation.checkSellCountAndStock(product.getSellCount());
+        ECommerceValidation.checkSellCountAndStock(product.getStock());
+        ECommerceValidation.checkImageLength(product.getImages());
+        ECommerceValidation.checkCategory(product.getCategory().getId());
         return productRepository.save(product);
     }
     @Override
@@ -87,26 +96,37 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductResponse> searchByName(String name) {
+        ECommerceValidation.checkString(name,"Filter",100);
         return Converter.findProducts(productRepository.searchByName(name));
     }
 
     @Override
     public List<ProductResponse> searchAndSortHighest(String name) {
+        ECommerceValidation.checkString(name,"Filter",100);
         return Converter.findProducts(productRepository.searchAndSortHighest(name));
     }
 
     @Override
     public List<ProductResponse> searchAndSortLowest(String name) {
+        ECommerceValidation.checkString(name,"Filter",100);
         return Converter.findProducts(productRepository.searchAndSortLowest(name));
     }
 
     @Override
     public List<ProductResponse> searchAndSortBest(String name) {
+        ECommerceValidation.checkString(name,"Filter",100);
         return Converter.findProducts(productRepository.searchAndSortBest(name));
     }
 
     @Override
     public List<ProductResponse> searchAndSortWorst(String name) {
+        ECommerceValidation.checkString(name,"Filter",100);
         return Converter.findProducts(productRepository.searchAndSortWorst(name));
+    }
+
+    @Override
+    public List<ProductResponse> getCategoryProducts(int categoryID) {
+        ECommerceValidation.checkCategory(categoryID);
+        return Converter.findProducts(productRepository.getCategoryProducts(categoryID));
     }
 }

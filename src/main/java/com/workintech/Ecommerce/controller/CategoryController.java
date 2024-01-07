@@ -29,8 +29,6 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
-    //todo GET BY CATEGORY GET REQUEST
-
     @PostMapping("/addProduct/{categoryID}")
     public ProductResponse addProduct(@RequestBody Product product, @PathVariable long categoryID){
         Category category = categoryService.getCategoryByID(categoryID);
