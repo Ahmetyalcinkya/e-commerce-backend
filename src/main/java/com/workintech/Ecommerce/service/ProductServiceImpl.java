@@ -4,9 +4,12 @@ import com.workintech.Ecommerce.dto.requestDto.ProductRequest;
 import com.workintech.Ecommerce.dto.responseDto.ProductResponse;
 import com.workintech.Ecommerce.entity.Category;
 import com.workintech.Ecommerce.entity.Product;
+import com.workintech.Ecommerce.exceptions.ECommerceException;
 import com.workintech.Ecommerce.repository.ProductRepository;
+import com.workintech.Ecommerce.util.Constants;
 import com.workintech.Ecommerce.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +27,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponse getProductByName(String name) {
-        return Converter.findProduct(productRepository.findByProductName(name));
+        Optional<Product> optionalProduct = productRepository.findByProductName(name);
+        if(optionalProduct.isPresent()){
+            return Converter.findProduct(optionalProduct.get());
+        }
+        throw new ECommerceException(Constants.PRODUCT_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -38,15 +45,13 @@ public class ProductServiceImpl implements ProductService {
         if(productOptional.isPresent()){
             return productOptional.get();
         }
-        //TODO Throw exception -> Ürün bulunamadı
-        return null;
+        throw new ECommerceException(Constants.PRODUCT_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
     @Override
     public Product saveProduct(Product product) {
-        Product foundProduct = productRepository.findByProductName(product.getName());
-        if(product.getName().equalsIgnoreCase(foundProduct.getName())){
-            return null;
-            //TODO Throw exception -> Bu isimde ürün var
+        Optional<Product> foundProduct = productRepository.findByProductName(product.getName());
+        if(foundProduct.isPresent()){
+           throw new ECommerceException(Constants.PRODUCT_IS_EXIST, HttpStatus.BAD_REQUEST);
         }
         return productRepository.save(product);
     }
@@ -57,8 +62,7 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(id);
         return product;
         }
-        //TODO Throw exception -> Ürün bulunamadı
-        return null;
+        throw new ECommerceException(Constants.PRODUCT_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 
     @Override

@@ -3,9 +3,12 @@ package com.workintech.Ecommerce.service;
 import com.workintech.Ecommerce.dto.responseDto.ProductResponse;
 import com.workintech.Ecommerce.dto.responseDto.UserResponse;
 import com.workintech.Ecommerce.entity.*;
+import com.workintech.Ecommerce.exceptions.ECommerceException;
 import com.workintech.Ecommerce.repository.UserRepository;
+import com.workintech.Ecommerce.util.Constants;
 import com.workintech.Ecommerce.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,7 +36,7 @@ public class UserServiceImpl implements UserDetailsService,UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findUserByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not valid!"));
+        return userRepository.findUserByEmail(username).orElseThrow(() -> new UsernameNotFoundException(Constants.USER_NOT_VALID));
     }
 
     @Override
@@ -47,16 +50,14 @@ public class UserServiceImpl implements UserDetailsService,UserService {
         if(optionalUser.isPresent()){
             return optionalUser.get();
         }
-        //TODO Throw exception -> Kullanıcı yok
-        return null;
+        throw new ECommerceException(Constants.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 
     @Override
     public void findUserByEmail(String email){
        boolean userExist = userRepository.findUserByEmail(email).isPresent();
        if(userExist){
-           //TODO Throw exception
-           throw new IllegalStateException("Email already taken.");
+           throw new ECommerceException(Constants.EMAIL_TAKEN, HttpStatus.BAD_REQUEST);
        }
     }
 
@@ -74,8 +75,7 @@ public class UserServiceImpl implements UserDetailsService,UserService {
     public User deleteUser(long id) {
         User user = findUserByID(id);
         if(user == null){
-            //TODO Throw exception
-            return null;
+            throw new ECommerceException(Constants.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
         userRepository.delete(user);
         return user;
@@ -94,8 +94,8 @@ public class UserServiceImpl implements UserDetailsService,UserService {
     @Override
     public BillingAddress addBillingAddress(BillingAddress billingAddress) {
         String userEmail = getAuthenticatedUser();
-        //TODO Throw exception
-        User user = userRepository.findUserByEmail(userEmail).orElseThrow(() -> new RuntimeException("User not found with email: " + userEmail));
+        User user = userRepository.findUserByEmail(userEmail).orElseThrow(() ->
+                new ECommerceException(Constants.USER_NOT_FOUND + userEmail,HttpStatus.NOT_FOUND));
 
         user.addBillingAddress(billingAddress);
         userRepository.save(user);
@@ -104,8 +104,8 @@ public class UserServiceImpl implements UserDetailsService,UserService {
     @Override
     public Address addAddress(Address address) {
         String userEmail = getAuthenticatedUser();
-        //TODO Throw exception
-        User user = userRepository.findUserByEmail(userEmail).orElseThrow(() -> new RuntimeException("User not found with email: " + userEmail));
+        User user = userRepository.findUserByEmail(userEmail).orElseThrow(() ->
+                new ECommerceException(Constants.USER_NOT_FOUND + userEmail,HttpStatus.NOT_FOUND));
 
         address.setUser(user);
         user.addAddress(address);

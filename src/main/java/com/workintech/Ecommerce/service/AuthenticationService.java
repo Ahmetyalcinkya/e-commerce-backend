@@ -1,15 +1,16 @@
 package com.workintech.Ecommerce.service;
 
 import com.workintech.Ecommerce.dto.responseDto.LoginResponse;
-import com.workintech.Ecommerce.dto.responseDto.UserResponse;
 import com.workintech.Ecommerce.entity.ConfirmationToken;
 import com.workintech.Ecommerce.entity.Role;
 import com.workintech.Ecommerce.entity.Token;
 import com.workintech.Ecommerce.entity.User;
+import com.workintech.Ecommerce.exceptions.ECommerceException;
 import com.workintech.Ecommerce.repository.RoleRepository;
 import com.workintech.Ecommerce.repository.UserRepository;
-//import com.workintech.Ecommerce.util.validation.EmailValidator;
+import com.workintech.Ecommerce.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -49,7 +50,6 @@ public class AuthenticationService {
         this.emailService = emailService;
     }
 
-    //TODO change the return value
     @Transactional
     public User register(String name, String email, String password, String role){
 
@@ -58,7 +58,7 @@ public class AuthenticationService {
         String encodedPassword = passwordEncoder.encode(password);
         Role userRole = roleRepository.findByAuthority(role).get();
 
-        User user = new User(); //kullanıcı setlenir
+        User user = new User();
         user.setName(name);
         user.setEmail(email);
         user.setPassword(encodedPassword);
@@ -78,29 +78,25 @@ public class AuthenticationService {
         return user;
     }
 
-//TODO: EMAIL SENDER WILL BE ADDED !!!
-
     @Transactional
     public String confirmEmailToken(String emailToken){
         ConfirmationToken confirmationToken = confirmationTokenService
                 .getEmailToken(emailToken)
                 .orElseThrow(() ->
-                        new IllegalStateException("Email token not found"));
+                        new ECommerceException(Constants.TOKEN_NOT_FOUND,HttpStatus.NOT_FOUND));
         if (confirmationToken.getConfirmedAt() != null) {
-            //TODO Throw exception
-            throw new IllegalStateException("email already confirmed");
+            throw new ECommerceException(Constants.EMAIL_CONFIRMED, HttpStatus.BAD_REQUEST);
         }
         LocalDateTime expiredAt = confirmationToken.getExpiresAt();
 
         if (expiredAt.isAfter(LocalDateTime.now())) {
-            //TODO Throw exception
-            throw new IllegalStateException("Email token expired");
+            throw new ECommerceException(Constants.EMAIL_TOKEN_EXPIRED, HttpStatus.BAD_REQUEST);
         }
         confirmationTokenService.setConfirmedAt(emailToken);
         userService.enableUser(
                 confirmationToken.getUser().getEmail());
 
-        return "confirmed";
+        return Constants.CONFIRMED;
     }
 
     @Transactional
@@ -121,8 +117,7 @@ public class AuthenticationService {
                     return new LoginResponse(token);
         }catch (Exception ex){
             ex.printStackTrace();
-            //TODO throw exception
-            throw new RuntimeException();
+            throw new ECommerceException(Constants.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
     }
 
@@ -132,7 +127,6 @@ public class AuthenticationService {
         if (foundUser.isPresent()){
             return foundUser.get();
         }
-        return null;
-        //TODO Throw exception
+        throw new ECommerceException(Constants.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 }

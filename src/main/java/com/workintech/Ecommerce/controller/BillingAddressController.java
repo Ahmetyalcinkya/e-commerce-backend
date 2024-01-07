@@ -2,10 +2,13 @@ package com.workintech.Ecommerce.controller;
 
 import com.workintech.Ecommerce.dto.responseDto.AddressResponse;
 import com.workintech.Ecommerce.entity.BillingAddress;
+import com.workintech.Ecommerce.exceptions.ECommerceException;
 import com.workintech.Ecommerce.service.BillingAddressService;
 import com.workintech.Ecommerce.service.UserService;
+import com.workintech.Ecommerce.util.Constants;
 import com.workintech.Ecommerce.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,8 +34,7 @@ public class BillingAddressController {
     public AddressResponse saveBillingAddress(@RequestBody BillingAddress address){
         List<BillingAddress> billingAddresses = billingAddressService.getAllBillingAddresses();
         if(billingAddresses.contains(address)){
-            //TODO Throw exception
-            throw new RuntimeException();
+            throw new ECommerceException(Constants.ADDRESS_ALREADY_EXIST, HttpStatus.BAD_REQUEST);
         }
         return Converter.findBillingAddress((userService.addBillingAddress(address)));
     }

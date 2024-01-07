@@ -1,8 +1,11 @@
 package com.workintech.Ecommerce.service;
 
+import com.workintech.Ecommerce.exceptions.ECommerceException;
+import com.workintech.Ecommerce.util.Constants;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -33,11 +36,10 @@ public class EmailServiceImpl implements EmailService {
 
             javaMailSender.send(mimeMessage);
 
-            return "Activation mail has sent!";
+            return Constants.ACTIVATION_MAIL;
 
         } catch (Exception ex){
-            //TODO Throw exception
-            throw new RuntimeException(ex);
+            throw new ECommerceException(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }

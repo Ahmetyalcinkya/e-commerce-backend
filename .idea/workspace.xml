@@ -4,17 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8a7a8a8-70ca-4f56-8a5f-ad952074424b" name="Changes" comment="Address tables &amp; controllers completed!">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/dto/responseDto/RoleResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/exceptions/ECommerceException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/exceptions/ErrorResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/exceptions/GlobalExceptionHandler.java" afterDir="false" />
+    <list default="true" id="e8a7a8a8-70ca-4f56-8a5f-ad952074424b" name="Changes" comment="SecurityConfigs &amp; GlobalErrorHandling added">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/util/Constants.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/RoleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/util/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/util/Converter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/BillingAddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/BillingAddressController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/AddressServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/AddressServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/BillingAddressServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/BillingAddressServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/CategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/EmailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/EmailServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/UserServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +181,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704466678866</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="SecurityConfigs &amp; GlobalErrorHandling added">
+      <option name="closed" value="true" />
+      <created>1704558044908</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1704558044908</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -189,7 +203,8 @@
     <MESSAGE value="account enabled field added &amp; email verification added &amp; email sender will be added" />
     <MESSAGE value="Email verification is completed !" />
     <MESSAGE value="Address tables &amp; controllers completed!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Address tables &amp; controllers completed!" />
+    <MESSAGE value="SecurityConfigs &amp; GlobalErrorHandling added" />
+    <option name="LAST_COMMIT_MESSAGE" value="SecurityConfigs &amp; GlobalErrorHandling added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -90,7 +90,7 @@ public class SecurityConfig {
         return source;
     }
 
-    @Bean //TODO SECURITY PATHS WILL BE ADDED
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity security) throws Exception {
         security.cors().configurationSource(corsConfigurationSource());
         return security
@@ -98,28 +98,28 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/roles").permitAll(); // +
 
-                    auth.requestMatchers("/admin/**").hasAuthority("ADMIN"); //TODO Forbidden error
+                    auth.requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN");
 
-                    auth.requestMatchers(HttpMethod.GET,"/auth/**").permitAll(); // +
-                    auth.requestMatchers(HttpMethod.POST,"/auth/**").permitAll(); // +
+                    auth.requestMatchers(HttpMethod.GET,"/auth/**").permitAll();
+                    auth.requestMatchers(HttpMethod.POST,"/auth/**").permitAll();
 
-                    auth.requestMatchers(HttpMethod.GET,"/categories").permitAll(); // +
-                    auth.requestMatchers("/categories/**").hasAnyAuthority("ADMIN", "STORE"); // will be added to frontend
+                    auth.requestMatchers(HttpMethod.GET,"/categories").permitAll();
+                    auth.requestMatchers("/categories/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_STORE");// will be added to frontend
 
                     auth.requestMatchers(HttpMethod.GET,"/products").permitAll(); // +
-                    auth.requestMatchers(HttpMethod.POST,"/products/").hasAnyAuthority("ADMIN", "STORE"); //TODO Forbidden error
-                    auth.requestMatchers(HttpMethod.GET,"/products/name/**").hasAnyAuthority("ADMIN", "STORE"); //TODO Forbidden error
-                    auth.requestMatchers(HttpMethod.GET,"/products/id/**").permitAll(); // +
-                    auth.requestMatchers(HttpMethod.GET,"/products/filter?**").permitAll(); //TODO Unauthorized Error
-                    auth.requestMatchers(HttpMethod.DELETE,"/products/**").hasAnyAuthority("ADMIN", "STORE");
+                    auth.requestMatchers(HttpMethod.POST,"/products/").hasAnyAuthority("ROLE_ADMIN", "ROLE_STORE");
+                    auth.requestMatchers(HttpMethod.GET,"/products/name/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
+                    auth.requestMatchers(HttpMethod.GET,"/products/id/**").permitAll();
+                    auth.requestMatchers(HttpMethod.GET,"/products/filter/**").permitAll();
+                    auth.requestMatchers(HttpMethod.DELETE,"/products/id/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_STORE");
 
-                    auth.requestMatchers(HttpMethod.GET,"/user/address").hasAuthority("USER"); //TODO Forbidden error
-                    auth.requestMatchers(HttpMethod.POST,"/user/address").hasAuthority("USER");
-                    auth.requestMatchers(HttpMethod.GET,"/user/address/**").hasAnyAuthority("ADMIN", "USER");
+                    auth.requestMatchers(HttpMethod.GET,"/user/address").hasAuthority("ROLE_USER");
+                    auth.requestMatchers(HttpMethod.POST,"/user/address").hasAuthority("ROLE_USER");
+                    auth.requestMatchers(HttpMethod.GET,"/user/address/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER");
 
-                    auth.requestMatchers(HttpMethod.GET,"/user/billing-address").hasAuthority("USER"); //TODO Forbidden error
-                    auth.requestMatchers(HttpMethod.POST,"/user/billing-address").hasAuthority("USER");
-                    auth.requestMatchers(HttpMethod.GET,"/user/billing-address/**").hasAnyAuthority("ADMIN", "USER");
+                    auth.requestMatchers(HttpMethod.GET,"/user/billing-address").hasAuthority("ROLE_USER");
+                    auth.requestMatchers(HttpMethod.POST,"/user/billing-address").hasAuthority("ROLE_USER");
+                    auth.requestMatchers(HttpMethod.GET,"/user/billing-address/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER");
 
                     auth.requestMatchers("/swagger-ui/**").permitAll(); //TODO Failed to load remote configuration
                     auth.anyRequest().authenticated();

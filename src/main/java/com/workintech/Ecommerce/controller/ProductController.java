@@ -4,10 +4,13 @@ import com.workintech.Ecommerce.dto.requestDto.ProductRequest;
 import com.workintech.Ecommerce.dto.responseDto.ProductResponse;
 import com.workintech.Ecommerce.entity.Category;
 import com.workintech.Ecommerce.entity.Product;
+import com.workintech.Ecommerce.exceptions.ECommerceException;
 import com.workintech.Ecommerce.service.CategoryService;
 import com.workintech.Ecommerce.service.ProductService;
+import com.workintech.Ecommerce.util.Constants;
 import com.workintech.Ecommerce.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +33,7 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @GetMapping("/name/{name}") //TODO nullpointer must be fixed
+    @GetMapping("/name/{name}")
     public ProductResponse getProductByName(@PathVariable String name){
         return productService.getProductByName(name);
     }
@@ -56,7 +59,7 @@ public class ProductController {
         return Converter.findProduct(productService.saveProduct(product));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/id/{id}")
     public ProductResponse deleteProduct(@PathVariable long id){
         return Converter.findProduct(productService.deleteProduct(id));
     }
@@ -85,7 +88,6 @@ public class ProductController {
                 default -> productService.searchByName(name);
             };
         }
-        //TODO Throw exception
-        return null;
+        throw new ECommerceException(Constants.FILTER_NOT_EXIST, HttpStatus.NOT_FOUND);
     }
 }

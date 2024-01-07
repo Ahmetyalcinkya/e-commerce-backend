@@ -1,8 +1,11 @@
 package com.workintech.Ecommerce.service;
 
 import com.workintech.Ecommerce.entity.Address;
+import com.workintech.Ecommerce.exceptions.ECommerceException;
 import com.workintech.Ecommerce.repository.AddressRepository;
+import com.workintech.Ecommerce.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,7 +37,6 @@ public class AddressServiceImpl implements AddressService {
             addressRepository.delete(optionalAddress.get());
             return optionalAddress.get();
         }
-        //TODO Throw exception
-        return null;
+        throw new ECommerceException(Constants.ADDRESS_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 }

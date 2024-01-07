@@ -10,9 +10,9 @@ import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    @Query(value = "SELECT p.id, p.name, p.description, p.price, p.rating, p.sell_count, p.stock, p.images, p.category_id" +
-            " FROM ecommerce.products AS p WHERE p.name=:productName", nativeQuery = true)
-    Product findByProductName(String productName);
+    @Query(value = "SELECT p.id, p.name, p.description, p.price, p.rating, p.sell_count, p.stock, p.images, \n" +
+            "p.category_id FROM ecommerce.products AS p WHERE p.name ILIKE %:productName%", nativeQuery = true)
+    Optional<Product> findByProductName(String productName);
 
     @Query(value = "SELECT p.id, p.name, p.description, p.price, p.rating, p.sell_count, p.stock, p.images, p.category_id" +
             " FROM ecommerce.products AS p ORDER BY p.price DESC", nativeQuery = true)
