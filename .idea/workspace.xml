@@ -4,22 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8a7a8a8-70ca-4f56-8a5f-ad952074424b" name="Changes" comment="Constants added &amp; Error responses added &amp;&amp; SecurityConfig fixed &amp; Some method updates">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/util/validation/ECommerceValidation.java" afterDir="false" />
+    <list default="true" id="e8a7a8a8-70ca-4f56-8a5f-ad952074424b" name="Changes" comment="Validations added &amp; minor updates">
       <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/workintech/Ecommerce/controller/UserControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/workintech/Ecommerce/repository/ProductRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/workintech/Ecommerce/repository/UserRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/workintech/Ecommerce/service/CategoryServiceImplTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/repository/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/AddressServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/AddressServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/BillingAddressServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/BillingAddressServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/ProductServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/service/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/util/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workintech/Ecommerce/util/Constants.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +27,7 @@
         <option value="Record" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -68,6 +60,8 @@
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/Ahmet Yalçınkaya (Kişisel Dosyalar)/Java/e-commerce-backend/src/Main.java&quot;,
@@ -78,24 +72,102 @@
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.workintech.Ecommerce.entity" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.workintech.Ecommerce.controller" />
+      <recent name="com.workintech.Ecommerce.service" />
+      <recent name="com.workintech.Ecommerce.repository" />
+    </key>
   </component>
-  <component name="RunManager">
-    <configuration name="ECommerceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.workintech.Ecommerce.ECommerceApplication" />
+  <component name="RunManager" selected="JUnit.UserControllerTest.saveUser">
+    <configuration name="CategoryServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="E-commerce" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.workintech.Ecommerce.*" />
+          <option name="PATTERN" value="com.workintech.Ecommerce.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.workintech.Ecommerce.service" />
+      <option name="MAIN_CLASS_NAME" value="com.workintech.Ecommerce.service.CategoryServiceImplTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CategoryServiceImplTest.getAllCategories" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="E-commerce" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.workintech.Ecommerce.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.workintech.Ecommerce.service" />
+      <option name="MAIN_CLASS_NAME" value="com.workintech.Ecommerce.service.CategoryServiceImplTest" />
+      <option name="METHOD_NAME" value="getAllCategories" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CategoryServiceImplTest.getCategoryByID" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="E-commerce" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.workintech.Ecommerce.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.workintech.Ecommerce.service" />
+      <option name="MAIN_CLASS_NAME" value="com.workintech.Ecommerce.service.CategoryServiceImplTest" />
+      <option name="METHOD_NAME" value="getCategoryByID" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductServiceImplTest.deleteProduct" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="E-commerce" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.workintech.Ecommerce.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.workintech.Ecommerce.service" />
+      <option name="MAIN_CLASS_NAME" value="com.workintech.Ecommerce.service.ProductServiceImplTest" />
+      <option name="METHOD_NAME" value="deleteProduct" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserControllerTest.saveUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="E-commerce" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.workintech.Ecommerce.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.workintech.Ecommerce.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.workintech.Ecommerce.controller.UserControllerTest" />
+      <option name="METHOD_NAME" value="saveUser" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ECommerceApplication" />
+        <item itemvalue="JUnit.UserControllerTest.saveUser" />
+        <item itemvalue="JUnit.ProductServiceImplTest.deleteProduct" />
+        <item itemvalue="JUnit.CategoryServiceImplTest" />
+        <item itemvalue="JUnit.CategoryServiceImplTest.getCategoryByID" />
+        <item itemvalue="JUnit.CategoryServiceImplTest.getAllCategories" />
       </list>
     </recent_temporary>
   </component>
@@ -196,7 +268,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704586028503</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Validations added &amp; minor updates">
+      <option name="closed" value="true" />
+      <created>1704635663471</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1704635663471</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -212,7 +292,8 @@
     <MESSAGE value="Address tables &amp; controllers completed!" />
     <MESSAGE value="SecurityConfigs &amp; GlobalErrorHandling added" />
     <MESSAGE value="Constants added &amp; Error responses added &amp;&amp; SecurityConfig fixed &amp; Some method updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="Constants added &amp; Error responses added &amp;&amp; SecurityConfig fixed &amp; Some method updates" />
+    <MESSAGE value="Validations added &amp; minor updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="Validations added &amp; minor updates" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
